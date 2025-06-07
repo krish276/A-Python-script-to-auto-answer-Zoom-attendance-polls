@@ -1,5 +1,7 @@
 # Zoom Attendance Automator
 
+Version 2.0
+
 A Python script to automatically answer Zoom attendance polls by detecting the poll pop‑up and using keyboard navigation to select “Yes” and submit.
 
 ---
@@ -23,6 +25,7 @@ A Python script to automatically answer Zoom attendance polls by detecting the p
 * Uses pure keyboard navigation (no image templates required)
 * Configurable start delay and poll‑check interval
 * Simple, single‑file script for easy customization
+* Checks the poll heading text contains "attendance" before answering
 
 ## Prerequisites
 
@@ -73,6 +76,7 @@ POLL_CHECK_INTERVAL  = 5            # Seconds between each poll scan
 tabs_to_radio       = 3            # Tab presses to focus the first radio button
 tabs_to_submit      = 2            # Tab presses from radio to Submit button
 POLL_WINDOW_REGEX   = 'Polls/Quizzes'  # Regex to match Zoom poll window title
+HEADING_KEYWORD     = 'attendance'    # Text expected in the poll heading
 ```
 
 Adjust these values as needed to match your screen layout and Zoom version.
