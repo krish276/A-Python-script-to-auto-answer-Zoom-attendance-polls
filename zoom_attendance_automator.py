@@ -2,6 +2,8 @@ import time
 import pyautogui
 import pyperclip
 
+VERSION = "2.0"
+
 # Attempt to import pygetwindow for window detection
 try:
     import pygetwindow as gw

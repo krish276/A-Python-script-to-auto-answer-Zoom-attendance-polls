@@ -1,5 +1,7 @@
 # Zoom Attendance Automator
 
+Version 2.0
+
 A Python script to automatically answer Zoom attendance polls by detecting the poll pop‑up and using keyboard navigation to select “Yes” and submit.
 
 ---
