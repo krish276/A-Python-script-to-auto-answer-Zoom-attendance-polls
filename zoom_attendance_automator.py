@@ -1,5 +1,6 @@
 import time
 import pyautogui
+import pyperclip
 
 # Attempt to import pygetwindow for window detection
 try:
@@ -13,6 +14,7 @@ delay_before_start = 5           # seconds to give time to focus Zoom window
 poll_check_interval = 10          # seconds between each poll check
 tabs_to_radio = 3                # number of Tab presses to reach the first radio option
 tabs_to_submit = 2               # number of Tab presses to reach the Submit button
+heading_keyword = 'attendance'   # text expected in the poll heading
 
 
 def focus_poll_window() -> bool:
@@ -34,6 +36,20 @@ def focus_poll_window() -> bool:
     return False
 
 
+def verify_poll_heading() -> bool:
+    """Copy the heading text and verify it contains ``heading_keyword``."""
+    try:
+        # The first Tab focuses the poll heading
+        pyautogui.press('tab')
+        pyautogui.hotkey('ctrl', 'c')
+        time.sleep(0.1)
+        text = pyperclip.paste().lower()
+        pyautogui.hotkey('shift', 'tab')  # return focus
+        return heading_keyword.lower() in text
+    except Exception:
+        return False
+
+
 def keyboard_navigation() -> bool:
     """
     Uses keyboard navigation to answer the poll:
@@ -45,6 +61,9 @@ def keyboard_navigation() -> bool:
     Only runs when poll window is focused.
     """
     if not focus_poll_window():
+        return False
+    if not verify_poll_heading():
+        print("Poll does not appear to be attendance; skipping")
         return False
     try:
         # Move focus to the 'Yes' radio option
